@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @example  插入排序
+ * 插入排序
  * @author   ShaoWei Pu <pushaowei0727@gmail.com>
  * @date     2017/6/17
- * @license  Mozilla
+ * @license  MIT
  * -------------------------------------------------------------
  * 思路分析：每步将一个待排序的纪录，按其关键码值的大小插入前面已经排序的文件中适当位置上，直到全部插入完为止。
  * -------------------------------------------------------------
@@ -14,10 +14,19 @@
  * 但将最后一个元素除外（让数组多一个空间才有插入的位置），而第二部分就只包含这一个元素（即待插入元素）。
  * 在第一部分排序完成后，再将这个最后元素插入到已排好序的第一部分中。
  *
- * @param $container
- * @return mixed
  */
 
+
+// +--------------------------------------------------------------------------
+// | 解题方式    | 这儿，可能有用的解决方案
+// +--------------------------------------------------------------------------
+
+/**
+ * InsertSort
+ *
+ * @param array $container
+ * @return array
+ */
 function InsertSort(array $container)
 {
     $count = count($container);
@@ -25,15 +34,20 @@ function InsertSort(array $container)
         $temp = $container[$i];
         $j    = $i - 1;
         // Init
-        while ($container[$j] > $temp){
+        while($j >= 0 && $container[$j] > $temp){
             $container[$j+1] = $container[$j];
-            $container[$j]   = $temp;
             $j--;
-            if ($j < 0) break;
         }
+        if($i != $j+1) 
+            $container[$j+1] = $temp;
     }
     return $container;
 }
+
+
+// +--------------------------------------------------------------------------
+// | 方案测试    | php `this.php` || PHPStorm -> 右键 -> Run `this.php`
+// +--------------------------------------------------------------------------
 var_dump(InsertSort([3, 12, 42, 1, 24, 5, 346, 7]));
 
 /*
